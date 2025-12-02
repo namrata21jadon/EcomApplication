@@ -3,9 +3,7 @@ package com.ecom.EcomApplication.Model.Order;
 import com.ecom.EcomApplication.Model.Product.Product;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
 @Entity

@@ -2,7 +2,6 @@ package com.ecom.EcomApplication.Service.Cart;
 
 import com.ecom.EcomApplication.Handler.CartException;
 import com.ecom.EcomApplication.Handler.UserNotFoundException;
-import com.ecom.EcomApplication.Model.Cart.CartItem;
 import com.ecom.EcomApplication.dto.Cart.CartRequest;
 import com.ecom.EcomApplication.dto.Cart.CartResponse;
 
