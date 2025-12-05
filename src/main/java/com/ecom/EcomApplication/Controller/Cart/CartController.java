@@ -2,13 +2,15 @@ package com.ecom.EcomApplication.Controller.Cart;
 
 import com.ecom.EcomApplication.Handler.CartException;
 import com.ecom.EcomApplication.Handler.UserNotFoundException;
+import com.ecom.EcomApplication.Model.Cart.CartItem;
 import com.ecom.EcomApplication.Service.Cart.CartService;
 import com.ecom.EcomApplication.dto.Cart.CartRequest;
-import com.ecom.EcomApplication.dto.Cart.CartResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,7 +36,7 @@ public class CartController {
     }
 
     @GetMapping
-    public ResponseEntity<CartResponse> getCartforUser(@RequestHeader("USER_ID") Long userId) throws UserNotFoundException, CartException {
+    public ResponseEntity<List<CartItem>> getCartforUser(@RequestHeader("USER_ID") Long userId) throws UserNotFoundException, CartException {
         return ResponseEntity.status(HttpStatus.OK).body(cartService.getCartforUser(userId));
     }
 

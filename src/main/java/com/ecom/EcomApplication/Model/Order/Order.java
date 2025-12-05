@@ -2,8 +2,7 @@ package com.ecom.EcomApplication.Model.Order;
 
 import com.ecom.EcomApplication.Model.User.User;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,7 +12,9 @@ import java.util.List;
 
 @Entity(name = "orders")
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
+@Builder
 public class Order {
 
     @Id
@@ -23,7 +24,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-    private Double price;
+    private Double totalPrice;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.PENDING;

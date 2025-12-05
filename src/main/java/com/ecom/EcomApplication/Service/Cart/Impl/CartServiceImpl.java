@@ -10,12 +10,12 @@ import com.ecom.EcomApplication.Repository.Product.ProductRepository;
 import com.ecom.EcomApplication.Repository.User.UserRepository;
 import com.ecom.EcomApplication.Service.Cart.CartService;
 import com.ecom.EcomApplication.dto.Cart.CartRequest;
-import com.ecom.EcomApplication.dto.Cart.CartResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -82,13 +82,21 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartResponse getCartforUser(Long userId) throws UserNotFoundException, CartException {
+    public List<CartItem> getCartforUser(Long userId) throws UserNotFoundException, CartException {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("The user does not exist"));
-        CartItem cart = cartRepository.findByUser(user);
+        List<CartItem> cart = cartRepository.findByUser(user);
         if(cart != null){
-            return objectMapper.convertValue(cart , CartResponse.class);
+            return cart;
         }
         throw new CartException("Cart not created Yet!!!");
+    }
+
+    @Override
+    public void clearCart(Long userId) throws UserNotFoundException {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        cartRepository.deleteByUser(user);
     }
 }
